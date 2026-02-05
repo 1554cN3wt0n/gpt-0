@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.17.0"
+__generated_with = "0.18.1"
 app = marimo.App(width="medium")
 
 
@@ -67,7 +67,6 @@ def _(random, string):
             )
             dataset.append(sample)
         return dataset
-
     return (generate_dataset,)
 
 
@@ -89,7 +88,6 @@ def _(string):
         def decode(self, indices):
             """Convert token indices back to text"""
             return ''.join([self.idx_to_char.get(idx, '?') for idx in indices])
-
 
     return (SimpleTokenizer,)
 
@@ -203,7 +201,6 @@ def _(F, math, nn, torch):
             x = x + self.dropout(ff_out)
 
             return x
-
     return (TransformerBlock,)
 
 
@@ -288,7 +285,6 @@ def _(F, TransformerBlock, nn, torch):
                 idx = torch.cat((idx, idx_next), dim=1)
 
             return idx
-
     return (SimpleGPT,)
 
 
@@ -328,7 +324,6 @@ def _(F, torch):
                 total_loss += loss.item()
 
         return total_loss / len(dataloader)
-
 
     return evaluate, train_epoch
 
@@ -430,13 +425,13 @@ def _(device, generate_dataset, model, tokenizer, torch):
     model.eval()
     test_samples = generate_dataset(num_samples=3, num_pairs_range=(5, 7))
 
-    for i, test_text in enumerate(test_samples):
+    for j, test_text in enumerate(test_samples):
         # Split at "What is"
         context_end = test_text.index("What is")
         context = test_text[:context_end]
         full_text = test_text
 
-        print(f"\nTest {i+1}:")
+        print(f"\nTest {j+1}:")
         print(f"Context: {context}")
         print(f"Full text: {full_text}")
 
